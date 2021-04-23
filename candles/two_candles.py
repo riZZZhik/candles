@@ -23,17 +23,17 @@ class TwoCandles:
         :type t: float
         :param dt: Time step
         :type dt: float
-        :param au: Dimensionless coefficient %of something%  # TODO: Of what?
+        :param au: Dimensionless combustion coefficient
         :type au: float
-        :param av: Dimensionless coefficient %of something%  # TODO: Of what?
+        :param av: Dimensionless ratio of oxygen and paraffin feed rate
         :type av: float
-        :param e: # TODO
+        :param e: Dimensionless normalization coefficient
         :type e: float
-        :param o: # TODO
+        :param o: Stephan Boltzmann's dimensionless constant
         :type o: float
-        :param c: The ratio of the forward energy to the gas expansion work2
+        :param c: Dimensionless ratio of the forward energy to the gas expansion work
         :type c: float
-        :param m0: # TODO
+        :param m0: Dimensionless candle area
         :type m0: float
         """
 
@@ -148,7 +148,7 @@ class TwoCandles:
         plt.grid()
         plt.title('Vibration frequency')
         plt.show()
-        logger.debug('Showe "Vibration frequency" graph')
+        logger.debug('Showed "Vibration frequency" graph')
 
     def calculate_oscillation_period(self):  # TODO: Calculate oscillation period
         max_value_ids = np.where(np.isin(self.norm_data[0][0][1], [23.214873619199803, 23.223769484885555]))[0]
