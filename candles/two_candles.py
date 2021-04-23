@@ -3,6 +3,7 @@ from math import exp
 import matplotlib.pyplot as plt
 import numpy as np
 from loguru import logger
+from scipy.fft import fft, fftfreq
 
 
 class TwoCandles:
@@ -136,7 +137,15 @@ class TwoCandles:
         self.show_plot(self.norm_data[1], self.limits[1], "Dependence of the relative concentration of oxygen")
         logger.info('Showed "Dependence of the relative concentration of oxygen" graph')
 
-    def calculate_oscillation_period(self):
+        num_samples = int(self.t / self.dt)
+        yf = fft(self.data_lists["u1"])[0:num_samples // 2]
+        xf = fftfreq(num_samples, self.dt)[:num_samples // 2]
+        plt.plot(xf, 2.0 / num_samples * np.abs(yf))
+        plt.grid()
+        plt.title('Vibration frequency')
+        plt.show()
+
+    def calculate_oscillation_period(self):  # TODO: Calculate oscillation period
         max_value_ids = np.where(np.isin(self.norm_data[0][0][1], [23.214873619199803, 23.223769484885555]))[0]
         logger.debug(f"Max value ids are {max_value_ids} "
                      f"and distance between them is {abs(max_value_ids[0] - max_value_ids[1])}")

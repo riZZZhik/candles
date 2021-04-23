@@ -1,6 +1,27 @@
 from candles import TwoCandles
 
-tc = TwoCandles()
-tc.calculate_equation()
-tc.show_graphs()
-tc.calculate_oscillation_period()
+
+# noinspection PyShadowingNames
+def initialize_phase():
+    u1 = 1.297838702869751  # относительная температура для первой свечи
+    u2 = 1.297838702869751  # относительная температура для второй всечи
+    v1 = 0.1735207098559884  # относительная концентрация кислорода, поступающего в пламя, для первой свечи
+    v2 = 0.1735207098559884  # относительная концентрация кислорода, поступающего в пламя, для второй свечи
+    fc = TwoCandles(u1, u2, v1, v2)
+    return fc
+
+
+# noinspection PyShadowingNames
+def initialize_antiphase():
+    u1 = 1.297838702869751  # относительная температура для первой свечи
+    u2 = 0.6100276613214819  # относительная температура для второй всечи
+    v1 = 0.1735207098559884  # относительная концентрация кислорода, поступающего в пламя, для первой свечи
+    v2 = 0.13266180927595078  # относительная концентрация кислорода, поступающего в пламя, для второй свечи
+    fc = TwoCandles(u1, u2, v1, v2)
+    return fc
+
+
+if __name__ == "__main__":
+    fc = initialize_antiphase()
+    fc.calculate_equation()
+    fc.show_graphs()
