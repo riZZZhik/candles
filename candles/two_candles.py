@@ -31,7 +31,7 @@ class TwoCandles:
         :type e: float
         :param o: # TODO
         :type o: float
-        :param c: # TODO
+        :param c: The ratio of the forward energy to the gas expansion work2
         :type c: float
         :param m0: # TODO
         :type m0: float
@@ -100,7 +100,11 @@ class TwoCandles:
         self.norm_data = [data1, data2]
         self.limits = [limits1, limits2]
 
-        logger.info("Calculated differential equation")
+        logger.debug("Calculated differential equation")
+        logger.debug(f'U1 = {self.data_lists["u1"][0]}')
+        logger.debug(f'U2 = {self.data_lists["u2"][100]}')
+        logger.debug(f'V1 = {self.data_lists["v1"][0]}')
+        logger.debug(f'V2 = {self.data_lists["v2"][100]}')
 
     @staticmethod
     def data_preprocessing(data):
@@ -133,9 +137,9 @@ class TwoCandles:
     def show_graphs(self):
         """Show graphs using matplotlib"""
         self.show_plot(self.norm_data[0], self.limits[0], "Time dependence of relative temperature")
-        logger.info('Showed "Time dependence of relative temperature" graph')
+        logger.debug('Showed "Time dependence of relative temperature" graph')
         self.show_plot(self.norm_data[1], self.limits[1], "Dependence of the relative concentration of oxygen")
-        logger.info('Showed "Dependence of the relative concentration of oxygen" graph')
+        logger.debug('Showed "Dependence of the relative concentration of oxygen" graph')
 
         num_samples = int(self.t / self.dt)
         yf = fft(self.data_lists["u1"])[0:num_samples // 2]
@@ -144,6 +148,7 @@ class TwoCandles:
         plt.grid()
         plt.title('Vibration frequency')
         plt.show()
+        logger.debug('Showe "Vibration frequency" graph')
 
     def calculate_oscillation_period(self):  # TODO: Calculate oscillation period
         max_value_ids = np.where(np.isin(self.norm_data[0][0][1], [23.214873619199803, 23.223769484885555]))[0]
